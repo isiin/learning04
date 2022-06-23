@@ -19,9 +19,11 @@ curl -s https://start.spring.io/starter.zip \
 unzip /tmp/app.zip -d /app && \
 rm /tmp/app.zip 
 
-WORKDIR /app
-COPY application.yml /app/
+COPY application.yml /app/src/main/resources/application.yml
 
 RUN set -eu && \
 rm /app/src/main/resources/application.properties && \
-/app/gradlew tasks
+:
+#/app/gradlew init
+
+WORKDIR /app

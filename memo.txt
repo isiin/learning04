@@ -1,0 +1,11 @@
+curl -s https://start.spring.io/starter.zip \
+-d javaVersion=17 \
+-d packaging=jar \
+-d type=gradle-project \
+-d dependencies=web,devtools,lombok,thymeleaf,jdbc,mariadb,mybatis \
+-d applicationName=DemoApplication \
+-d artifactId=demo \
+-d description=demo \
+-d packageName=com.example.demo \
+-o app.zip && \
+unzip app.zip -d app 

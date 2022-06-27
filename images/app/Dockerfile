@@ -10,7 +10,7 @@ curl -s https://start.spring.io/starter.zip \
 -d javaVersion=17 \
 -d packaging=jar \
 -d type=gradle-project \
--d dependencies=web,devtools,lombok,thymeleaf,jdbc,mariadb,mybatis \
+-d dependencies=web,devtools,lombok,thymeleaf,jdbc,postgresql,mybatis \
 -d applicationName=DemoApplication \
 -d artifactId=demo \
 -d description=demo \
@@ -19,11 +19,8 @@ curl -s https://start.spring.io/starter.zip \
 unzip /tmp/app.zip -d /app && \
 rm /tmp/app.zip 
 
-COPY application.yml /app/src/main/resources/application.yml
+COPY application.yml /app/application.yml
 
-RUN set -eu && \
-rm /app/src/main/resources/application.properties && \
-:
-#/app/gradlew init
+RUN /app/gradlew init
 
 WORKDIR /app

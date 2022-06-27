@@ -5,24 +5,18 @@ volumes:
 
 services:
   db:
-    image: mariadb:latest
-    ports:
-      - "3306:3306"
+    image: postgres:14-alpine
     container_name: db
+    ports:
+      - "5432:5432"
     volumes:
-      - ./images/db/ddl.sql:/docker-entrypoint-initdb.d/ddl.sql
-      - db-data:/var/lib/mysql
+      - ./images/db/initdb.d:/docker-entrypoint-initdb.d
+      - db-data:/var/lib/postgresql/data
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_ALLOW_EMPTY_PASSWORD=no
-      - MYSQL_RANDOM_ROOT_PASSWORD=no
-      - MYSQL_USER=dbuser
-      - MYSQL_PASSWORD=dbpass
-      - MYSQL_DATABASE=testdb
-    command:
-      - mysqld
-      - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_unicode_ci
+      - POSTGRES_USER=dbuser
+      - POSTGRES_PASSWORD=dbpass
+      - POSTGRES_DB=testdb
+      - LANG=ja_JP.utf8
 
   app:
     build:
@@ -30,9 +24,11 @@ services:
     container_name: app
     ports:
       - "8080:8080"
-    command: 
-      - /app/gradlew
-      - bootRun
+    volumes:
+      - ./app:/app
+#    command: 
+#      - /app/gradlew
+#      - bootRun
     depends_on:
       - db
 

@@ -2,7 +2,6 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:mariadb://localhost:3306/testdb
+    url: jdbc:potgresql://localhost:5432/testdb
     username: dbuser
     password: dbpass
-    driver-class-name: org.mariadb.jdbc.Driver 

@@ -1,7 +1,0 @@
-server:
-  port: 8080
-spring:
-  datasource:
-    url: jdbc:potgresql://localhost:5432/testdb
-    username: dbuser
-    password: dbpass

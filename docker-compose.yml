@@ -13,15 +13,17 @@ services:
       - ./images/db/initdb.d:/docker-entrypoint-initdb.d
       - db-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=dbuser
-      - POSTGRES_PASSWORD=dbpass
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
       - POSTGRES_DB=testdb
-      - LANG=ja_JP.utf8
+#      - LANG=ja_JP.utf8
 
   app:
-    build:
-      context: ./images/app
+    image: amazoncorretto:17
+#    build:
+#      context: ./images/app
     container_name: app
+    tty: true
     ports:
       - "8080:8080"
     volumes:
